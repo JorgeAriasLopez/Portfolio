@@ -1,0 +1,13 @@
+﻿  BehaviourTree.cpp
+  Blackboard.cpp
+  EatTask.cpp
+  IdleTask.cpp
+  Main.cpp
+C:\Users\Alpha\Desktop\BehaviourTree\BehaviourTree\Main.cpp(19,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  ParentTask.cpp
+  PlayTask.cpp
+  SelectorTask.cpp
+  SequenceTask.cpp
+  Task.cpp
+  Generating Code...
+  BehaviourTree.vcxproj -> C:\Users\Alpha\Desktop\BehaviourTree\x64\Debug\BehaviourTree.exe
