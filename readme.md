@@ -11,8 +11,8 @@ This is Jorge Arias López personal portfolio. Here you can find my info and own
   
 ## Java
 
-One of my first coding languages that I learn. I did most of my degree work with this language, even I used it the 90% of my first job. 
+One of my first coding languages that I learned. I did most of my degree work with this language, even I used it the 90% of my first job. 
 
 ## C++
 
-When I started working with this language was when the words **efficiency** and **optimization** took a biggger impact on me. Even nowadays I am still learning more about these terms. 
+When I started working with this language was when the words **efficiency** and **optimization** took a bigger impact on me. Even nowadays I am still learning more about these terms. 
