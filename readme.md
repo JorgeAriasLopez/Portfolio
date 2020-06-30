@@ -12,4 +12,4 @@ One of my first coding languages that I learn. I did most of my degree work with
 
 ## C++
 
-When I started working with this language was when the words **effiency** and **optimization** took a biggger impact on me. Even nowadays I am still learning more about these terms. 
+When I started working with this language was when the words **efficiency** and **optimization** took a biggger impact on me. Even nowadays I am still learning more about these terms. 
