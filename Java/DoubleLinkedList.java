@@ -1,7 +1,28 @@
+package com.mycompany.mavenproject1;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 //Double linked list with generic type
 //@author Jorge Arias Lopez
 
-public class DoubleLinkedList<T> {
+//Interface
+interface IDoubleLinkedList<T>{
+    public boolean isEmpty();
+    public int size();
+
+    public void addLast(T content);
+    public void addFirst(T content);
+    public void addBefore(T addThis, T beforeThis);
+    public void addAfter(T addThis, T afterThis);
+   
+    public void remove(T dataToRemove);
+    public boolean contains(T dataToSearch);
+
+}
+
+public class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
+
     //Node class which save content and two references to the previous and the next node
     //This class is for internal use, so no other class can access it
     class Node<T> {
@@ -25,12 +46,60 @@ public class DoubleLinkedList<T> {
 
     //DoubleLinkedList variable. Where saved the first node and the last of the list.
     private Node<T> begining, end;
+    final Logger logger = LoggerFactory.getLogger(DoubleLinkedList.class);
 
     //Empty constructor
     public DoubleLinkedList(){
         this.begining = null;
         this.end = null;
     }
+    
+    //Constructor that get an array of objects of type T to fill the list and do tests
+    public DoubleLinkedList(T[] objects ){
+        this.begining = null;
+        this.end = null;
+        for(T object : objects){
+            Node<T> node = new Node<T>(object);
+            if(this.end == null){
+                this.begining = node;
+            }else{
+                this.end.next = node;
+                node.previous = this.end;
+            }
+             this.end = node;
+        }
+    }
+    
+    // Overriding equals() to compare two Complex objects 
+    @Override
+    public boolean equals(Object o) { 
+        // If the object is compared with itself then return true 
+        if (o == this) { 
+           return true; 
+        } 
+
+        /* Check if o is an instance of Complex or not 
+        "null instanceof [type]" also returns false */
+        if (!(o instanceof DoubleLinkedList)) { 
+                return false; 
+        } 
+
+        // typecast o to Complex so that we can compare data members 
+        DoubleLinkedList dll = (DoubleLinkedList) o;
+        //If sizes are not equal. Return false.
+        if(this.size() != dll.size()){
+            return false;
+        }
+        
+        for(Node<T> i = this.begining, j = dll.begining ; 
+                i != null; i = i.next, j = j.next){
+            if(!i.content.equals(j.content)){
+                return false;
+            }       
+        }
+        
+        return true;
+    } 
 
     //Add node on the tail of the list
     public void addLast(T content){
@@ -102,18 +171,6 @@ public class DoubleLinkedList<T> {
         }
     }
 
-    //Print the list. Only will work if T is String
-    public void print(){
-        if(this.begining == null){
-            System.out.println("The list is empty");
-        }else if(this.begining.content instanceof String){
-            for(Node<T> i = this.begining ; i != null; i = i.next){
-                System.out.print("\t[" + i.content +"]");
-            }
-            System.out.println("");    
-        }      
-    }
-
     //Remove a node.
     //Take note that if the list have information repeated this will only return the first encounter
     public void remove(T dataToRemove){
@@ -140,61 +197,4 @@ public class DoubleLinkedList<T> {
         return (findNode(dataToSearch) != null);
     }
 
-    //Main function for unit tests. The comments show what should be printed on screen
-    public static void main(String[] args) {
-        DoubleLinkedList<String> dll = new DoubleLinkedList<String>();
-
-        /*EMPTY LIST*/
-        dll.print();           //The list is empty
-        if( dll.isEmpty()){
-           System.out.println("Empty list");   //Empty list
-        }else{
-            System.out.println("Not empty list");
-        }
-        
-        /*ADDLAST*/
-        dll.addLast("3");
-        dll.addLast("5");
-        dll.print();            //3 5
-
-        /*ADDFIRST*/
-        dll.addFirst("2");
-        dll.addFirst("0");
-        dll.print();           //0 2 3 5
-
-        /*SIZE*/
-        System.out.println("Size: " + dll.size()); //Size: 4
-
-        /*ADDBEFORE*/
-        dll.addBefore("4", "5");
-        dll.print();        //0 2 3 4 5
-
-        /*ADDAFTER*/
-        dll.addAfter("1", "0");
-        dll.print();        //0 1 2 3 4 5
-
-        /*ISEMPTY*/
-        if(dll.isEmpty()){
-            System.out.println("Empty list");  
-        }else{
-            System.out.println("Not empty list");   //Not empty list
-        }
-
-        /*CONTAINS*/
-        if(dll.contains("2")){
-            System.out.println("List contains 2");     //List contains 2
-        }else{
-            System.out.println("List does not contain 2");   
-        }       
-        if(dll.contains("22")){
-            System.out.println("List contains 22");    
-        }else{
-            System.out.println("List does not contain 22");   //List does not contain 22 
-        }
-
-        /*REMOVE*/
-        dll.remove("3");
-        dll.print();     //0 1 2 4 5
-        System.out.println("Size: " + dll.size()); //Size: 5
-    }
 }
